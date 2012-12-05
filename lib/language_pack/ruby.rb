@@ -192,7 +192,7 @@ private
 
   # Sets ENV['HEAD_SHA'], allowing applications to know what version they are
   def set_head_sha
-    puts ENV['GIT_DIR']
+    puts ENV['GIT_DIR'].inspect
     puts run("ls #{ENV['GIT_DIR']}")
     ENV['HEAD_SHA'] = run("cat #{ENV['GIT_DIR']}/refs/heads/master")
     puts ENV['HEAD_SHA']
