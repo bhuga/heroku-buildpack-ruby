@@ -194,7 +194,7 @@ private
   def set_head_sha
     puts ENV['GIT_DIR'].inspect
     puts run("ls #{ENV['GIT_DIR']}")
-    ENV['HEAD_SHA'] = run("cat #{ENV['GIT_DIR']}/refs/heads/master")
+    ENV['HEAD_SHA'] = run("git rev-parse HEAD")
     puts ENV['HEAD_SHA']
   end
 
