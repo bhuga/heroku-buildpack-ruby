@@ -53,6 +53,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     install_jvm
     setup_language_pack_environment
     setup_profiled
+    set_env_sha
     allow_git do
       install_language_pack_gems
       build_bundler
@@ -187,6 +188,13 @@ private
     end
     ENV["GEM_HOME"] = slug_vendor_base
     ENV["PATH"]     = "#{ruby_install_binstub_path}:#{config_vars["PATH"]}"
+  end
+
+  # Sets ENV['HEAD_SHA'], allowing applications to know what version they are
+  def set_head_sha
+    puts run("ls #{ENV['GIT_DIR']}")
+    ENV['HEAD_SHA'] = run("cat #{ENV['GIT_DIR']}/refs/heads/master")
+    puts ENV['HEAD_SHA']
   end
 
   # sets up the profile.d script for this buildpack
